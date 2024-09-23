@@ -1,20 +1,12 @@
-import {Image, StyleSheet, Platform, StatusBar, View} from 'react-native';
+import {StatusBar, View} from 'react-native';
+import {Post} from "@/components/Post";
 
-import styled from 'styled-components/native'
-
-const Post = styled.View`
-    margin-top: 30px;
-    padding: 15px;
-    border-bottom-width: 1px;
-    border-bottom-color: rgba(0, 0, 0, 0.1);
-    border-bottom-style: solid;
-`
 
 
 export default function HomeScreen() {
   return (
    <View>
-     <Post/>
+       <Post title='Test' imageUrl='https://imgd-ct.aeplcdn.com/1056x660/cw/ec/20361/Nissan-GTR-Front-view-84914.jpg?v=201711021421&q=80' createdAt='21/12/2024'/>
      <StatusBar
          barStyle='default'
      />
