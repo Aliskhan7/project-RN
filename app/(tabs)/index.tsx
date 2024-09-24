@@ -1,12 +1,39 @@
-import {StatusBar, View} from 'react-native';
+import axios from "axios";
+import {StatusBar, Alert, FlatList, View} from 'react-native';
 import {Post} from "@/components/Post";
+import {useEffect, useState} from "react";
 
 
 
 export default function HomeScreen() {
+    const [items, setItems] = useState();
+    const [isLoading, setIsLoading] = useState(true);
+
+    const fetchPosts = () => {
+        setIsLoading(true)
+        axios
+            .get('https://66f3069c71c84d8058779c36.mockapi.io/fakeApi/items')
+            .then(({data}) => {
+                setItems(data)
+            }).catch(err => {
+            console.log(err)
+            Alert.alert('Ошибка', 'Не удалось получить статьи')
+            })
+            .finally(() => {
+                setIsLoading(false)
+            })
+    }
+
+    useEffect(() => {
+        fetchPosts()
+    }, [])
+
   return (
    <View>
-       <Post title='Test' imageUrl='https://imgd-ct.aeplcdn.com/1056x660/cw/ec/20361/Nissan-GTR-Front-view-84914.jpg?v=201711021421&q=80' createdAt='21/12/2024'/>
+       <FlatList
+           data={items}
+           renderItem={({item}) => <Post title={item.title} imageUrl={item.imageUrl} createdAt={item.createdAt}/>}
+       />
      <StatusBar
          barStyle='default'
      />
