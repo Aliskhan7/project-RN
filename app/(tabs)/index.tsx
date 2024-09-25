@@ -1,5 +1,5 @@
 import axios from "axios";
-import {StatusBar, Alert, FlatList, View} from 'react-native';
+import {StatusBar, Alert, FlatList, View, ActivityIndicator, Text, RefreshControl, TouchableOpacity} from 'react-native';
 import {Post} from "@/components/Post";
 import {useEffect, useState} from "react";
 
@@ -28,11 +28,30 @@ export default function HomeScreen() {
         fetchPosts()
     }, [])
 
+    if(isLoading){
+        return(
+            <View style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}>
+                <ActivityIndicator size='large'/>
+                <Text style={{marginTop: 15}}>
+                    Загрузка
+                </Text>
+            </View>
+        )
+    }
+
   return (
    <View>
        <FlatList
+           refreshControl={<RefreshControl refreshing={isLoading} onRefresh={fetchPosts} /> }
            data={items}
-           renderItem={({item}) => <Post title={item.title} imageUrl={item.imageUrl} createdAt={item.createdAt}/>}
+           renderItem={({item}) =>
+                <TouchableOpacity>
+                    <Post title={item.title} imageUrl={item.imageUrl} createdAt={item.createdAt}/>
+                </TouchableOpacity>}
        />
      <StatusBar
          barStyle='default'
