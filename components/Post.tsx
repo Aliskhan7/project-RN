@@ -4,7 +4,7 @@ import styled from 'styled-components/native'
 
 const PostView = styled.View`
     flex-direction: row;
-    margin-top: 50px;
+    margin-top: 20px;
     padding: 15px;
     border-bottom-width: 1px;
     border-bottom-color: rgba(0, 0, 0, 0.1);

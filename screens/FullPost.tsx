@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import styled from 'styled-components'
+import styled from 'styled-components/native'
 import {ActivityIndicator, Alert, Text, View} from "react-native";
 import axios from "axios";
 import Loading from "@/components/Loading";
@@ -16,8 +16,16 @@ const PostText = styled.Text`
     line-height: 24px;
 `
 
+interface IData {
+    id: string,
+    title: string,
+    imageUrl: string,
+    text: string,
+    createdAt: number,
+}
+
 const FullPost = () => {
-    const [data, setData] = useState();
+    const [data, setData] = useState<IData>();
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
