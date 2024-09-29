@@ -24,13 +24,16 @@ interface IData {
     createdAt: number,
 }
 
-const FullPost = () => {
+const FullPost = ({route, navigation}: any) => {
     const [data, setData] = useState<IData>();
     const [isLoading, setIsLoading] = useState(true);
 
+    const {id, title} = route.params;
+
     useEffect(() => {
+        navigation.setOptions({ title })
         axios
-            .get('https://66f3069c71c84d8058779c36.mockapi.io/fakeApi/items/1')
+            .get(`https://66f3069c71c84d8058779c36.mockapi.io/fakeApi/items/${id}`)
             .then(({data}) => {
                 setData(data)
             }).catch(err => {

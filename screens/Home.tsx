@@ -12,7 +12,7 @@ import {
 import {Post} from "@/components/Post";
 import axios from "axios";
 
-const Home = () => {
+const Home = ({navigation}: any) => {
     const [items, setItems] = useState();
     const [isLoading, setIsLoading] = useState(true);
 
@@ -55,7 +55,7 @@ const Home = () => {
                 refreshControl={<RefreshControl refreshing={isLoading} onRefresh={fetchPosts} /> }
                 data={items}
                 renderItem={({item}) =>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('FullPost', {id: item.id, title: item.title})}>
                         <Post title={item.title} imageUrl={item.imageUrl} createdAt={item.createdAt}/>
                     </TouchableOpacity>}
             />

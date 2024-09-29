@@ -33,6 +33,13 @@ const PostDate = styled.Text`
     margin-top: 2px;
 `
 
+const thuncateTitle = (str: string) => {
+    if(str.length >= 50){
+        return str.substring(0, 50) + '...'
+    }
+    return str
+}
+
 export const Post = ({title, imageUrl, createdAt}:{title:string, imageUrl: string, createdAt:string}) =>{
     return(
         <PostView>
@@ -40,8 +47,8 @@ export const Post = ({title, imageUrl, createdAt}:{title:string, imageUrl: strin
                 source={{uri: imageUrl}}
             />
             <PostDetails>
-                <PostTitle>{title}</PostTitle>
-                <PostDate>{createdAt}</PostDate>
+                <PostTitle>{thuncateTitle(title)}</PostTitle>
+                <PostDate>{new Date(createdAt).toLocaleDateString()}</PostDate>
             </PostDetails>
         </PostView>
     )
